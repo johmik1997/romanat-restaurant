@@ -5,4 +5,4 @@ djangorestframework_simplejwt==5.2.0
 django-axes==5.25.0
 python-dotenv
 cloudinary
-cloudinary-storage
+# cloudinary-storage
