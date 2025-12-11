@@ -7,3 +7,4 @@ python-dotenv
 cloudinary
 # cloudinary-storage
 gunicorn
+setuptools==68.0.0
