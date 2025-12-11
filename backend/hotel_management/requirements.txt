@@ -9,3 +9,4 @@ python-dotenv
 setuptools==68.0.0
 gunicorn
 psycopg2-binary
+django-axes==6.1.1
