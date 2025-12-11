@@ -6,3 +6,4 @@ django-axes==5.25.0
 python-dotenv
 cloudinary
 # cloudinary-storage
+gunicorn
