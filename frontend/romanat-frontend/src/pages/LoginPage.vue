@@ -1,74 +1,71 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-[#334f4f]">
-
+  <div class="login-container">
     <!-- Background -->
     <div 
-      class="absolute inset-0 bg-cover bg-center opacity-40"
+      class="background-image"
       :style="{ backgroundImage: `url('${backgroundImage}')` }"
     ></div>
 
     <!-- Soft Dark Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 backdrop-blur-sm"></div>
+    <div class="background-overlay"></div>
 
     <!-- Login Card -->
-    <div class="relative z-10 w-full max-w-md p-10 rounded-3xl bg-black/30 shadow-2xl backdrop-blur-xl border border-white/10">
+    <div class="login-card">
 
       <!-- Logo -->
-      <div class="flex flex-col items-center mb-8">
-        <div class="h-14 w-14 text-[#0f766e] drop-shadow-lg">
+      <div class="logo-container">
+        <div class="logo-icon">
           <svg fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
             <path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
           </svg>
         </div>
-        <p class="mt-4 text-2xl font-semibold text-white tracking-wide">
+        <p class="logo-text">
           Romanat
         </p>
       </div>
 
       <!-- Heading -->
-      <div class="text-center mb-10">
-        <h1 class="text-3xl font-bold text-white mb-1">Welcome Back</h1>
-        <p class="text-gray-400">Access your reservations and manage your stay</p>
+      <div class="heading-container">
+        <h1 class="heading-title">Welcome Back</h1>
+        <p class="heading-subtitle">Access your reservations and manage your stay</p>
       </div>
 
       <!-- Form -->
-      <form @submit.prevent="handleLogin" class="space-y-6">
+      <form @submit.prevent="handleLogin" class="login-form">
 
-        <!-- Email -->
-        <div>
-          <label class="block text-sm text-gray-300 mb-2">Username</label>
-          <div class="relative">
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <div class="input-container">
             <input 
               v-model="form.username"
               type="text"
               placeholder="Enter username"
-              class="w-full h-12 rounded-xl bg-white/10 text-white px-4 border border-white/10 placeholder-gray-400 focus:ring-2 focus:ring-[#0f766e] focus:outline-none transition-all duration-300"
+              class="form-input"
             />
           </div>
         </div>
 
         <!-- Password -->
-        <div>
-          <label class="block text-sm text-gray-300 mb-2">Password</label>
-          <div class="relative">
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-container">
             <input 
               v-model="form.password"
               :type="showPassword ? 'text' : 'password'"
               placeholder="••••••••"
-              class="w-full h-12 rounded-xl bg-white/10 text-white px-4 pr-12 border border-white/10 placeholder-gray-400 focus:ring-2 focus:ring-[#0f766e] focus:outline-none transition-all duration-300"
+              class="form-input"
             />
             <button 
               type="button"
               @click="showPassword = !showPassword"
-              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+              class="password-toggle"
             >
-              <!-- Eye icon for hidden password -->
-              <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-if="!showPassword" class="eye-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
               </svg>
-              <!-- Eye slash icon for visible password -->
-              <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-else class="eye-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
               </svg>
             </button>
@@ -78,9 +75,9 @@
         <!-- Error Message -->
         <div 
           v-if="error"
-          class="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 p-3 border border-red-400/20 rounded-lg"
+          class="error-message"
         >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="error-icon" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
           </svg>
           <span>{{ error }}</span>
@@ -90,12 +87,11 @@
         <button 
           type="submit"
           :disabled="loading"
-          class="w-full h-12 rounded-xl bg-[#0f766e] text-white font-semibold shadow-lg hover:bg-[#0d5d56] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
+          class="login-button"
         >
-          <!-- Loading Spinner -->
           <svg 
             v-if="loading"
-            class="w-5 h-5 animate-spin"
+            class="loading-spinner"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -108,9 +104,9 @@
       </form>
 
       <!-- Sign Up Link -->
-      <div class="mt-8 text-center text-gray-400 text-sm">
+      <div class="signup-link">
         Don't have an account?
-        <router-link to="/signup" class="text-[#0f766e] ml-1 font-medium hover:underline cursor-pointer transition-colors duration-300">
+        <router-link to="/signup" class="signup-text">
           Sign Up
         </router-link>
       </div>
@@ -123,8 +119,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { authenticate } from '../api/auth/loginApi.js' // your auth.js
-import { save as stor } from '../localStorage/index.js' // your reactive localStorage wrapper
+import { authenticate } from '../api/auth/loginApi.js'
+import { save as stor } from '../localStorage/index.js'
 
 const router = useRouter()
 
@@ -144,7 +140,6 @@ const handleLogin = async () => {
     error.value = 'Please fill in all fields'
     return
   }
-console.log(form.value.username, form.value.password);
 
   loading.value = true
   error.value = ''
@@ -152,6 +147,7 @@ console.log(form.value.username, form.value.password);
   try {
     const data = await authenticate(form.value)
 
+    // Save user data to localStorage
     await stor('logged_in_user', {
       access_token: data.access,
       refresh_token: data.refresh,
@@ -159,47 +155,296 @@ console.log(form.value.username, form.value.password);
       is_admin: data.is_admin || false,
       requiresReset: data.requiresReset || false,
       id: data.id,
-      roleName:data.role.name,
-
+      roleName: data.role.name,
+      // Save additional role info if available
+      role: data.role,
+      permissions: data.permissions || []
     })
-    form.value.username=''
-    form.value.password=''
-    router.push('/')
+
+    // Clear form
+    form.value.username = ''
+    form.value.password = ''
+
+    // Redirect based on role
+    await redirectBasedOnRole(data.role.name)
+
   } catch (err) {
     error.value = err.detail || 'Invalid username or password.'
+    console.error('Login error:', err)
   } finally {
     loading.value = false
   }
 }
 
-
-   
+const redirectBasedOnRole = async (roleName) => {
+  // Wait a moment to ensure localStorage is updated
+  await new Promise(resolve => setTimeout(resolve, 100))
+  
+  switch(roleName.toLowerCase()) {
+    case 'receptionist':
+    case 'manager':
+    case 'admin':
+      // Redirect to staff home page which will handle dashboard redirection
+      router.push('/staff')
+      break
+    case 'customer':
+    case 'guest':
+      // Redirect to guest home page
+      router.push('/guest')
+      break
+    default:
+      // Default fallback - redirect to user type selection
+      console.warn('Unknown role:', roleName, 'redirecting to home')
+      router.push('/')
+  }
+}
 </script>
 
 <style scoped>
-/* Custom glow effect */
-.shadow-glow {
-  box-shadow: 0 0 15px 5px rgba(15, 118, 110, 0.3);
+/* Container styles */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #334f4f;
 }
 
-/* Smooth transitions for all interactive elements */
-button, input, a {
+.background-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+}
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+  backdrop-filter: blur(4px);
+}
+
+/* Login card */
+.login-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 28rem;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-icon {
+  height: 3.5rem;
+  width: 3.5rem;
+  color: #0f766e;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.025em;
+}
+
+/* Heading */
+.heading-container {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.heading-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.heading-subtitle {
+  color: #9ca3af;
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #d1d5db;
+  margin-bottom: 0.5rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Focus styles for accessibility */
-input:focus {
-  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.3);
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.form-input:focus {
+  outline: none;
   border-color: rgba(15, 118, 110, 0.5);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.3);
 }
 
-/* Custom animation for the logo */
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.password-toggle:hover {
+  color: white;
+}
+
+.eye-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Error message */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f87171;
+  font-size: 0.875rem;
+  background-color: rgba(248, 113, 113, 0.1);
+  padding: 0.75rem;
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: 0.5rem;
+}
+
+.error-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Login button */
+.login-button {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: #0f766e;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #0d5d56;
+}
+
+.login-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spin 1s linear infinite;
+}
+
+/* Sign up link */
+.signup-link {
+  margin-top: 2rem;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.signup-text {
+  color: #0f766e;
+  margin-left: 0.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.signup-text:hover {
+  text-decoration: underline;
+  color: #0d5d56;
+}
+
+/* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.h-14.w-14 {
-  animation: float 3s ease-in-out infinite;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth transitions */
+button,
+input,
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

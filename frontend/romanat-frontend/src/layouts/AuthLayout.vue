@@ -1,58 +1,58 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 text-black">
+  <div class="auth-layout">
     <!-- Background Decorations -->
-    <div class="absolute top-0 left-0 w-72 h-72 bg-blue-200 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-50"></div>
+    <div class="background-circle circle-left"></div>
+    <div class="background-circle circle-right"></div>
     
     <!-- Main Content -->
-    <div class="relative w-full max-w-6xl flex bg-white rounded-3xl shadow-2xl overflow-hidden">
+    <div class="main-container">
       <!-- Left Side - Brand/Info -->
-      <div class="hidden lg:flex lg:flex-1 bg-gradient-to-br from-[#0f766e]/30 to-[#0f766e]/90 text-white p-12 relative overflow-hidden">
+      <div class="left-side">
         <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-10">
-          <div class="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
-          <div class="absolute top-32 right-16 w-12 h-12 border-2 border-white rounded-full"></div>
-          <div class="absolute bottom-20 left-20 w-16 h-16 border-2 border-white rounded-full"></div>
+        <div class="pattern-overlay">
+          <div class="pattern-circle circle-1"></div>
+          <div class="pattern-circle circle-2"></div>
+          <div class="pattern-circle circle-3"></div>
         </div>
         
-        <div class="relative z-10 flex flex-col justify-between h-full">
+        <div class="left-content">
           <!-- Logo/Brand -->
-          <div>
-            <div class="flex items-center space-x-3 mb-8">
-              <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
-                <span class="material-icons-outlined text-2xl">hotel</span>
+          <div class="brand-section">
+            <div class="logo-container">
+              <div class="logo-icon">
+                <span class="material-icons-outlined">hotel</span>
               </div>
-              <span class="text-2xl font-bold">Romanat Restaurant</span>
+              <span class="brand-name">Romanat Restaurant</span>
             </div>
             
-            <h1 class="text-4xl font-bold mb-6">
+            <h1 class="welcome-title">
               Welcome to<br>Your Perfect Stay
             </h1>
-            <p class="text-black text-lg leading-relaxed">
+            <p class="welcome-description">
               Experience luxury and comfort like never before. Join thousands of satisfied guests who trust us for their perfect getaway.
             </p>
           </div>
 
           <!-- Features List -->
-          <div class="space-y-4">
-            <div v-for="feature in features" :key="feature.text" class="flex items-center space-x-3">
-              <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                <span class="material-icons-outlined text-sm">check</span>
+          <div class="features-list">
+            <div v-for="feature in features" :key="feature.text" class="feature-item">
+              <div class="feature-icon">
+                <span class="material-icons-outlined">check</span>
               </div>
-              <span class="text-blue-100">{{ feature.text }}</span>
+              <span class="feature-text">{{ feature.text }}</span>
             </div>
           </div>
 
           <!-- Testimonial -->
-          <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
-            <p class="text-black italic mb-4">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
               "The best hotel experience I've ever had. The staff went above and beyond to make our stay memorable."
             </p>
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full"></div>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
               <div>
-                <p class="font-semibold">Sarah Johnson</p>
-                <p class="text-black text-sm">Regular Guest</p>
+                <p class="author-name">Sarah Johnson</p>
+                <p class="author-title">Regular Guest</p>
               </div>
             </div>
           </div>
@@ -60,35 +60,35 @@
       </div>
 
       <!-- Right Side - Auth Form -->
-      <div class="flex-1 p-8 lg:p-12">
+      <div class="right-side">
         <!-- Mobile Logo -->
-        <div class="lg:hidden flex items-center justify-center mb-8">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-              <span class="material-icons-outlined text-white text-xl">hotel</span>
+        <div class="mobile-logo">
+          <div class="mobile-logo-container">
+            <div class="mobile-logo-icon">
+              <span class="material-icons-outlined">hotel</span>
             </div>
-            <span class="text-xl font-bold text-gray-900">Hotel Haven</span>
+            <span class="mobile-brand-name">Romanat Restaurant</span>
           </div>
         </div>
 
         <!-- Back Button -->
         <button 
           @click="goBack"
-          class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 mb-8 transition-colors"
+          class="back-button"
         >
           <span class="material-icons-outlined">arrow_back</span>
           <span>Back to home</span>
         </button>
 
         <!-- Auth Content -->
-        <div class="max-w-md mx-auto">
+        <div class="auth-content">
           <slot />
         </div>
 
         <!-- Footer -->
-        <div class="mt-12 text-center">
-          <p class="text-gray-600 text-sm">
-            © 2024 Hotel Haven. All rights reserved.
+        <div class="footer">
+          <p class="footer-text">
+            © 2024 Romanat Restaurant. All rights reserved.
           </p>
         </div>
       </div>
@@ -127,8 +127,345 @@ export default {
 </script>
 
 <style scoped>
-/* Smooth transitions for all interactive elements */
-button, a {
+/* Main container */
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+  color: #1f2937;
+}
+
+/* Background circles */
+.background-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.circle-left {
+  top: 0;
+  left: 0;
+  width: 18rem;
+  height: 18rem;
+  background-color: #bfdbfe;
+  transform: translate(-50%, -50%);
+}
+
+.circle-right {
+  bottom: 0;
+  right: 0;
+  width: 24rem;
+  height: 24rem;
+  background-color: #c7d2fe;
+  transform: translate(50%, 50%);
+}
+
+/* Main container */
+.main-container {
+  position: relative;
+  width: 100%;
+  max-width: 72rem;
+  display: flex;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* Left side */
+.left-side {
+  display: none;
+  flex: 1;
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.3), rgba(15, 118, 110, 0.9));
+  color: white;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .left-side {
+    display: flex;
+  }
+}
+
+.pattern-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+}
+
+.pattern-circle {
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.circle-1 {
+  top: 2.5rem;
+  left: 2.5rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+.circle-2 {
+  top: 8rem;
+  right: 4rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.circle-3 {
+  bottom: 5rem;
+  left: 5rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.left-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Brand section */
+.brand-section {
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.logo-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon .material-icons-outlined {
+  font-size: 1.5rem;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.welcome-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.welcome-description {
+  color: #dbeafe;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+/* Features list */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.feature-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon .material-icons-outlined {
+  font-size: 0.875rem;
+}
+
+.feature-text {
+  color: #dbeafe;
+  font-size: 0.875rem;
+}
+
+/* Testimonial */
+.testimonial-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.testimonial-text {
+  color: #dbeafe;
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.author-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.author-title {
+  color: #dbeafe;
+  font-size: 0.75rem;
+}
+
+/* Right side */
+.right-side {
+  flex: 1;
+  padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .right-side {
+    padding: 3rem;
+  }
+}
+
+/* Mobile logo */
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .mobile-logo {
+    display: none;
+  }
+}
+
+.mobile-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobile-logo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #0f766e;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-logo-icon .material-icons-outlined {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.mobile-brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Back button */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4b5563;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #1f2937;
+}
+
+.back-button .material-icons-outlined {
+  font-size: 1.125rem;
+}
+
+/* Auth content */
+.auth-content {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.footer-text {
+  color: #4b5563;
+  font-size: 0.75rem;
+}
+
+/* Material icons */
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth transitions */
+button,
+a {
   transition: all 0.3s ease;
 }
 

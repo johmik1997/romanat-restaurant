@@ -108,11 +108,11 @@
                   class="rounded border-gray-300 text-primary focus:ring-primary"
                 />
               </th>
-              <th
+              <!-- <th
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Booking ID
-              </th>
+              </th> -->
               <th
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
@@ -168,11 +168,11 @@
               </td>
 
               <!-- Booking ID -->
-              <td
+              <!-- <td
                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
               >
                 #{{ reservation.booking_id || reservation.id }}
-              </td>
+              </td> -->
 
               <!-- Guest Info -->
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 p-6">
+  <div class="min-h-screen bg-gray-50 p-6 overflow-x-auto">
     <!-- Header -->
     <div class="mb-8">
       <div class="flex items-center justify-between">
@@ -168,13 +168,13 @@
               <!-- User Info -->
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="shrink-0 h-10 w-10">
+                  <!-- <div class="shrink-0 h-10 w-10">
                     <img 
                       class="h-10 w-10 rounded-full object-cover" 
                       :src="user.avatar || '/api/placeholder/40/40'" 
                       :alt="user.first_name"
                     >
-                  </div>
+                  </div> -->
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">
                       {{ user.first_name + " " +user.last_name }}
@@ -242,7 +242,7 @@
                   >
                     <span class="material-symbols-outlined text-xl">edit</span>
                   </button>
-                  <button 
+                  <!-- <button 
                     v-if="user.id !== currentUserId"
                     @click="toggleUserStatus(user)"
                     :class="[
@@ -256,7 +256,7 @@
                     <span class="material-symbols-outlined text-xl">
                       {{ user.status === 'active' ? 'lock' : 'lock_open' }}
                     </span>
-                  </button>
+                  </button> -->
                   <button 
                     v-if="user.id !== currentUserId"
                     @click="deleteUser(user)"

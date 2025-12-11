@@ -63,7 +63,7 @@ export default {
 
       mainNavItems: [
         { name: "Manager Dashboard", href: "/staff/manager/dashboard", icon: "admin_panel_settings", roles: ["Manager"] },
-        { name: "Dashboard", href: "/staff", icon: "dashboard", roles: ["Receptionist"] },
+        { name: "Dashboard", href: "/staff/receptionist/dashboard", icon: "dashboard", roles: ["Receptionist"] },
         { name: "Reservations", href: "/staff/reservation", icon: "calendar_month", roles: ["Receptionist", "Manager"] },
         { name: "Guests", href: "/staff/guests", icon: "group", roles: ["Receptionist", "Manager"] },
         { name: "Rooms", href: "/staff/rooms", icon: "bed", roles: ["Manager"] },

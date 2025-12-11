@@ -35,7 +35,7 @@ const routes = [
   component: StaffHomePage,
   meta: { layout: 'DefaultLayout' },
   children: [
-    { path: '', name: 'Dashboard', component: Dashboard },
+    { path: 'receptionist/dashboard', name: 'Dashboard', component: Dashboard },
     { path: 'reservation', name: 'Reservation', component: Reservation },
     { path: 'reservation/:id', name: 'ReservationDetails', component: ReservationDetails },
     { path: 'guests', name: 'GuestManagement', component: GuestManagment },

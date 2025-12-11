@@ -487,7 +487,7 @@ const initializeForm = async () => {
         status: roomData.status || 'available',
         notes: roomData.notes || '',
         thumbnail: roomData.thumbnail || roomData.thumbnail_url || '',
-        thumbnail_file: null,
+        thumbnail_file: roomData.thumbnail,
         images_files: [],
         title: roomData.title || '',
         subtitle: roomData.subtitle || '',
@@ -584,24 +584,33 @@ const submitForm = async () => {
     // Append all fields
     Object.keys(room.value).forEach(key => {
       if (key === 'thumbnail_file' && room.value.thumbnail_file) {
-        formData.append('thumbnail', room.value.thumbnail_file); // Changed to 'thumbnail'
-      } 
-      else if (key === 'images_files') {
-        room.value.images_files.forEach(file => {
-          formData.append('additional_images', file); // Changed to 'additional_images'
-        });
-      }
-      else if (key === 'amenities') {
-        formData.append(key, JSON.stringify(room.value[key]));
-      }
-      else if (key === 'remove_thumbnail' && room.value[key]) {
-        formData.append('remove_thumbnail', 'true');
-      }
-      else if (room.value[key] !== null && room.value[key] !== undefined && 
-               room.value[key] !== '' && key !== 'thumbnail_file' && 
-               key !== 'images_files') {
-        formData.append(key, room.value[key]);
-      }
+    formData.append('thumbnail_file', room.value.thumbnail_file);
+}
+
+else if (key === 'images_files') {
+    room.value.images_files.forEach(file => {
+        formData.append('images_files', file); // THIS FIXES YOUR ERROR
+    });
+}
+
+else if (key === 'amenities') {
+    formData.append(key, JSON.stringify(room.value[key]));
+}
+
+else if (key === 'remove_thumbnail' && room.value[key]) {
+    formData.append('remove_thumbnail', 'true');
+}
+
+else if (
+    room.value[key] !== null &&
+    room.value[key] !== undefined &&
+    room.value[key] !== '' &&
+    key !== 'thumbnail_file' &&
+    key !== 'images_files'
+) {
+    formData.append(key, room.value[key]);
+}
+
     });
     
     console.log('Submitting form data for', isEditMode.value ? 'edit' : 'add');
