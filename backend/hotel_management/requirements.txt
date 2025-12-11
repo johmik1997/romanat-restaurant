@@ -2,7 +2,7 @@ Django==5.1.2
 djangorestframework==3.14.0
 django-cors-headers==3.13.0
 django-filter==24.2
-djangorestframework_simplejwt==5.2.0
+djangorestframework_simplejwt==5.4.0
 cloudinary==1.39.0
 django-cloudinary-storage==0.3.0
 python-dotenv
@@ -10,3 +10,4 @@ setuptools==68.0.0
 gunicorn
 psycopg2-binary
 django-axes==6.1.1
+

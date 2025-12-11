@@ -4,13 +4,15 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.exceptions import AuthenticationFailed
 
+from datetime import datetime, timezone as dt_timezone
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     def validate(self, attrs):
         data = super().validate(attrs)
 
-        # Send login signal
+        # Log login action
         user_logged_in.send(
             sender=self.user.__class__,
             request=self.context['request'],
@@ -23,14 +25,17 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
 
-        # Basic user info
+        # Basic User Information
         data['id'] = self.user.id
         data['username'] = self.user.username
         data['is_admin'] = self.user.is_staff
         data['is_active'] = self.user.is_active
 
+        # Optional date/time if you need it
+        data['login_time'] = datetime.now(dt_timezone.utc).isoformat()
+
         # ----- ROLE FIX -----
-        role = self.user.role
+        role = getattr(self.user, "role", None)
         if role:
             data['role'] = {
                 "id": role.id,
@@ -58,6 +63,5 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 raise AuthenticationFailed(
                     detail='Due to unsuccessful attempts, the system is locked'
                 )
-            else:
-                raise e
+            raise e
         return response
