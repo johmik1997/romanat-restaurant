@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.http import HttpResponse
 
-from backend.hotel_management.hotel_management.utils import seed_data
+from utils import seed_data
 
 # Import the seeder function
 

@@ -63,7 +63,7 @@ def seed_data():
     admin_role = Role.objects.get(name="Admin")
 
     ADMIN_USERNAME = "romanat"
-    ADMIN_PASSWORD = "ChangeThisPassword123"   # ⬅️ CHANGE THIS
+    ADMIN_PASSWORD = "password"   # ⬅️ CHANGE THIS
     ADMIN_EMAIL = "admin@example.com"
 
     admin_user, created = User.objects.get_or_create(
