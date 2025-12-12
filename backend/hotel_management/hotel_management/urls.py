@@ -1,12 +1,26 @@
-
 from django.contrib import admin
 from django.urls import include, path
+from django.http import HttpResponse
+
+from backend.hotel_management.hotel_management.utils import seed_data
+
+# Import the seeder function
+
+
+def load_seed(request):
+    msg = seed_data()
+    return HttpResponse(msg)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/accounts/', include('accounts.urls')), 
-    path('api/', include('rooms.urls')), 
+
+    # API Routes
+    path('api/accounts/', include('accounts.urls')),
+    path('api/', include('rooms.urls')),
     path('api/', include('reservations.urls')),
     path('api/payments/', include('payments.urls')),
 
+    # Seed endpoint
+    path("seed-data/", load_seed),
 ]

@@ -1,7 +1,7 @@
 import { authorize, load } from '../localStorage'
 import axios from 'axios'
 
-const baseURL = import.meta.env.VITE_APP_BASE_URL || 'http://127.0.0.1:8000'
+const baseURL = import.meta.env.VITE_APP_BASE_URL || 'https://romanat-restaurant-7.onrender.com'
 
 axios.defaults.headers.common['Content-Type'] = 'application/json'
 

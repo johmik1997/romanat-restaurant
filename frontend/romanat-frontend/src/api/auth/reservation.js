@@ -2,7 +2,7 @@ import api from '../api'
 import axios from 'axios'
 
 // Define base URL
-const baseurl = import.meta.env.VITE_APP_BASE_URL || 'http://127.0.0.1:8000'
+const baseurl = import.meta.env.VITE_APP_BASE_URL || 'https://romanat-restaurant-7.onrender.com'
 
 
 /**

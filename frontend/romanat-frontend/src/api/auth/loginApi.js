@@ -2,7 +2,7 @@ import axios from "axios";
 import { get as getFromStore } from "../../localStorage";
 
 const baseurl =
-  import.meta.env.VITE_APP_BASE_URL || "http://127.0.0.1:8000";
+  import.meta.env.VITE_APP_BASE_URL || "https://romanat-restaurant-7.onrender.com";
 
 /**
  * LOGIN
