@@ -63,19 +63,21 @@ def seed_data():
             print(f"      ✓ Assigned: {perm.name}")
 
     print("\n👑 Creating Admin User (romanat)...")
-    admin_role = Role.objects.get(name="Admin")
+    admin_role = Role.objects.get(name="Manager")
 
-    ADMIN_USERNAME = "romanat"
+    ADMIN_USERNAME = "manager"
     ADMIN_PASSWORD = "password"  # ⬅️ change after first login
-    ADMIN_EMAIL = "admin@example.com"
+    ADMIN_EMAIL = "manager@gmail.com.com"
 
     admin_user, created = User.objects.get_or_create(
         username=ADMIN_USERNAME,
         defaults={
+            "first_name":"manager",
+            "last_name":"manage",
             "email": ADMIN_EMAIL,
             "role": admin_role,
             "is_staff": True,
-            "is_superuser": True,
+            # "is_superuser": True,
         }
     )
 

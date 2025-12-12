@@ -62,13 +62,13 @@ export default {
       profileImage: "https://lh3.googleusercontent.com/...",
 
       mainNavItems: [
-        { name: "Manager Dashboard", href: "/staff/manager/dashboard", icon: "admin_panel_settings", roles: ["Manager"] },
+        { name: "Manager Dashboard", href: "/staff/manager/dashboard", icon: "admin_panel_settings", roles: ["Manager","Admin"] },
         { name: "Dashboard", href: "/staff/receptionist/dashboard", icon: "dashboard", roles: ["Receptionist"] },
         { name: "Reservations", href: "/staff/reservation", icon: "calendar_month", roles: ["Receptionist", "Manager"] },
         { name: "Guests", href: "/staff/guests", icon: "group", roles: ["Receptionist", "Manager"] },
         { name: "Rooms", href: "/staff/rooms", icon: "bed", roles: ["Manager"] },
         { name: "Reports", href: "/staff/report", icon: "bar_chart", roles: ["Manager"] },
-        { name: "User Management", href: "/staff/user", icon: "admin_panel_settings", roles: ["Manager"] }
+        { name: "User Management", href: "/staff/user", icon: "admin_panel_settings", roles: ["Manager", "Admin"] }
       ],
 
       secondaryNavItems: [
