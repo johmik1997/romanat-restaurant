@@ -1,4 +1,4 @@
-# populate_initial_data.py
+# hotel_management/utils/populate_initial_data.py
 
 import os
 import django
@@ -7,10 +7,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hotel_management.settings")
 django.setup()
 
 from accounts.models import Role, Permission, RolePermission, User
-
-# ==========================
-# PERMISSIONS DATA
-# ==========================
 
 permissions_data = [
     {"id": 1, "name": "manage_rooms", "description": "Can add and edit rooms"},
@@ -24,10 +20,6 @@ permissions_data = [
     {"id": 10, "name": "manage_roles", "description": "Can Create/update roles"},
     {"id": 11, "name": "manage_users", "description": "Can create/update/delete staff"},
 ]
-
-# ==========================
-# ROLES AND PERMISSIONS
-# ==========================
 
 roles_permissions = {
     "Admin": [1, 2, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -50,7 +42,6 @@ def seed_data():
         role, created = Role.objects.get_or_create(name=role_name)
         print(f"   ➤ Role: {role.name}")
 
-        # Reset old permissions (safe re-run)
         RolePermission.objects.filter(role=role).delete()
 
         for perm_id in perm_ids:
@@ -63,7 +54,7 @@ def seed_data():
     admin_role = Role.objects.get(name="Admin")
 
     ADMIN_USERNAME = "romanat"
-    ADMIN_PASSWORD = "password"   # ⬅️ CHANGE THIS
+    ADMIN_PASSWORD = "ChangeThisPassword123"
     ADMIN_EMAIL = "admin@example.com"
 
     admin_user, created = User.objects.get_or_create(
@@ -87,4 +78,3 @@ def seed_data():
 
 if __name__ == "__main__":
     seed_data()
-
