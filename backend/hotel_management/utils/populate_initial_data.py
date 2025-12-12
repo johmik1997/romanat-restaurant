@@ -8,6 +8,9 @@ django.setup()
 
 from accounts.models import Role, Permission, RolePermission, User
 
+# ==========================
+# Permissions
+# ==========================
 permissions_data = [
     {"id": 1, "name": "manage_rooms", "description": "Can add and edit rooms"},
     {"id": 2, "name": "view_rooms", "description": "Can view rooms"},
@@ -21,6 +24,9 @@ permissions_data = [
     {"id": 11, "name": "manage_users", "description": "Can create/update/delete staff"},
 ]
 
+# ==========================
+# Roles → Permissions
+# ==========================
 roles_permissions = {
     "Admin": [1, 2, 4, 5, 6, 7, 8, 9, 10, 11],
     "Manager": [1, 2, 4, 5, 6, 7],
@@ -42,19 +48,25 @@ def seed_data():
         role, created = Role.objects.get_or_create(name=role_name)
         print(f"   ➤ Role: {role.name}")
 
+        # Reset old permissions
         RolePermission.objects.filter(role=role).delete()
 
         for perm_id in perm_ids:
-            perm = Permission.objects.get(name=permissions_data[perm_id - 1]["name"])
+            # ✅ Lookup permission safely by ID
+            perm_dict = next((p for p in permissions_data if p["id"] == perm_id), None)
+            if not perm_dict:
+                print(f"⚠️ Permission ID {perm_id} not found, skipping")
+                continue
+
+            perm = Permission.objects.get(name=perm_dict["name"])
             RolePermission.objects.create(role=role, permission=perm)
             print(f"      ✓ Assigned: {perm.name}")
 
     print("\n👑 Creating Admin User (romanat)...")
-
     admin_role = Role.objects.get(name="Admin")
 
     ADMIN_USERNAME = "romanat"
-    ADMIN_PASSWORD = "ChangeThisPassword123"
+    ADMIN_PASSWORD = "password"  # ⬅️ change after first login
     ADMIN_EMAIL = "admin@example.com"
 
     admin_user, created = User.objects.get_or_create(
@@ -75,6 +87,7 @@ def seed_data():
         print(f"   ✓ Admin user '{ADMIN_USERNAME}' already exists (skipping).")
 
     print("\n🎉 All initial data loaded successfully!")
+    return "Initial data seeded successfully!"
 
 if __name__ == "__main__":
     seed_data()
