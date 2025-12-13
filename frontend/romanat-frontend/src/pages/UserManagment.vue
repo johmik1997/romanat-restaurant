@@ -491,42 +491,43 @@ export default {
       }, 500) // 500ms delay
     },
 
-    async loadUsers() {
-      try {
-        // Build query params for backend
-        const params = {
-          page: this.currentPage,
-          page_size: this.itemsPerPage
-        }
+  async loadUsers() {
+  try {
+    const params = {
+      page: this.currentPage,
+      page_size: this.itemsPerPage
+    }
 
-        // Add search query if exists
-        if (this.searchQuery.trim()) {
-          params.search = this.searchQuery.trim()
-        }
+    if (this.searchQuery.trim()) {
+      params.search = this.searchQuery.trim()
+    }
 
-        // Add role filter if not 'all'
-        if (this.filters.role !== 'all') {
-          params.role = this.filters.role
-        }
+    if (this.filters.role !== 'all') {
+      params.role = this.filters.role
+    }
 
-        // Add status filter if not 'all'
-        if (this.filters.status !== 'all') {
-          params.status = this.filters.status
-        }
+    if (this.filters.status !== 'all') {
+      params.status = this.filters.status
+    }
 
-        // Call API with params
-        const response = await getUsers(params)
-        
-        // Update data
-        this.users = response.results || response.result || []
-        this.totalCount = response.count || 0
-        
-      } catch (error) {
-        console.error('Error loading users:', error)
-        this.users = []
-        this.totalCount = 0
-      }
-    },
+    const response = await getUsers(params)
+
+    // ✅ HANDLE BOTH PAGINATED & NON-PAGINATED
+    if (Array.isArray(response)) {
+      this.users = response
+      this.totalCount = response.length
+    } else {
+      this.users = response.results || []
+      this.totalCount = response.count || 0
+    }
+
+  } catch (error) {
+    console.error('Error loading users:', error)
+    this.users = []
+    this.totalCount = 0
+  }
+}
+,
 
     formatRole(role) {
       const roleMap = {

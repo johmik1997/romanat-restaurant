@@ -6,7 +6,9 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hotel_management.settings")
 django.setup()
 
+# ✅ IMPORT MODELS AFTER setup
 from accounts.models import Role, Permission, RolePermission, User
+from rooms.models import RoomType
 
 # ==========================
 # Permissions
@@ -29,10 +31,20 @@ permissions_data = [
 # ==========================
 roles_permissions = {
     "Admin": [1, 2, 4, 5, 6, 7, 8, 9, 10, 11],
-    "Manager": [1, 2, 4, 5, 6, 7],
+    "Manager": [1, 2, 4, 5, 6, 7,10,11],
     "Receptionist": [2, 5, 6, 8, 9],
-    "Customer": [2, 5, 6],
+    "Customer": [2, 5, 6,7],
 }
+
+# ==========================
+# Room Types
+# ==========================
+room_types_data = [
+    {"name": "Single"},
+    {"name": "Family"},
+    {"name": "Twin"},
+]
+
 
 def seed_data():
     print("\n📌 Creating Permissions...")
@@ -45,34 +57,33 @@ def seed_data():
 
     print("\n📌 Creating Roles and assigning permissions...")
     for role_name, perm_ids in roles_permissions.items():
-        role, created = Role.objects.get_or_create(name=role_name)
+        role, _ = Role.objects.get_or_create(name=role_name)
         print(f"   ➤ Role: {role.name}")
 
-        # Reset old permissions
         RolePermission.objects.filter(role=role).delete()
 
         for perm_id in perm_ids:
-            # ✅ Lookup permission safely by ID
             perm_dict = next((p for p in permissions_data if p["id"] == perm_id), None)
             if not perm_dict:
-                print(f"⚠️ Permission ID {perm_id} not found, skipping")
                 continue
 
             perm = Permission.objects.get(name=perm_dict["name"])
             RolePermission.objects.create(role=role, permission=perm)
             print(f"      ✓ Assigned: {perm.name}")
 
+    # ✅ ROOM TYPES (CORRECT PLACE)
+    print("\n🏨 Creating Room Types...")
+    for rt in room_types_data:
+        room_type, created = RoomType.objects.get_or_create(name=rt["name"])
+        print(f"   ✓ {room_type.name} ({'created' if created else 'exists'})")
+
     print("\n👑 Creating Admin User (romanat)...")
     admin_role = Role.objects.get(name="Admin")
 
-    ADMIN_USERNAME = "romanat"
-    ADMIN_PASSWORD = "password"  # ⬅️ change after first login
-    ADMIN_EMAIL = "admin@example.com"
-
     admin_user, created = User.objects.get_or_create(
-        username=ADMIN_USERNAME,
+        username="romanat",
         defaults={
-            "email": ADMIN_EMAIL,
+            "email": "admin@example.com",
             "role": admin_role,
             "is_staff": True,
             "is_superuser": True,
@@ -80,14 +91,14 @@ def seed_data():
     )
 
     if created:
-        admin_user.set_password(ADMIN_PASSWORD)
+        admin_user.set_password("password")
         admin_user.save()
-        print(f"   ✓ Admin user '{ADMIN_USERNAME}' created!")
+        print("   ✓ Admin user created!")
     else:
-        print(f"   ✓ Admin user '{ADMIN_USERNAME}' already exists (skipping).")
+        print("   ✓ Admin user already exists (skipping).")
 
     print("\n🎉 All initial data loaded successfully!")
-    return "Initial data seeded successfully!"
+
 
 if __name__ == "__main__":
     seed_data()

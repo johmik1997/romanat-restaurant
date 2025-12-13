@@ -20,10 +20,7 @@
               <span class="brief-icon">📍</span>
               <span class="brief-text">City Center Location</span>
             </div>
-            <div class="brief-item">
-              <span class="brief-icon">🏆</span>
-              <span class="brief-text">Since 1995</span>
-            </div>
+          
           </div>
         </div>
       </div>
@@ -66,15 +63,7 @@
                   </div>
                 </div>
                 
-                <div class="feature-card">
-                  <div class="feature-icon-wrapper">
-                    <span class="material-icons-outlined">spa</span>
-                  </div>
-                  <div class="feature-content">
-                    <h4 class="feature-title">Spa & Wellness</h4>
-                    <p class="feature-description">Full-service spa & fitness center</p>
-                  </div>
-                </div>
+               
                 
                 <div class="feature-card">
                   <div class="feature-icon-wrapper">
