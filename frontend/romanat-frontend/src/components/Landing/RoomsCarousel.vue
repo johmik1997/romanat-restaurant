@@ -193,7 +193,7 @@ const fetchRooms = async () => {
   try {
     const { data } = await axios.get('https://romanat-restaurant-7.onrender.com/api/rooms/')
     // Map API fields to frontend structure
-    rooms.value = data.result.map(r => ({
+    rooms.value = data.map(r => ({
       id: r.id,
       room_number: r.room_number,
       title: r.title || `Room ${r.room_number}`,

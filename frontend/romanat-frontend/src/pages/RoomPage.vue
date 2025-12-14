@@ -121,7 +121,7 @@ const fetchRooms = async () => {
     const { data } = await axios.get('https://romanat-restaurant-7.onrender.com/api/rooms/')
     
     // Enhanced room data mapping with fallbacks
-    rooms.value = data.result.map(r => ({
+    rooms.value = data.map(r => ({
       id: r.id,
       title: r.title || `Room ${r.room_number}`,
       description: r.description || 'No description available',
