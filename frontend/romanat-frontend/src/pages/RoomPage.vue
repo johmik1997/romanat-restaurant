@@ -118,7 +118,7 @@ const filters = [
 const fetchRooms = async () => {
   try {
     loading.value = true
-    const { data } = await axios.get('http://127.0.0.1:8000/api/rooms/')
+    const { data } = await axios.get('https://romanat-restaurant-7.onrender.com/api/rooms/')
     
     // Enhanced room data mapping with fallbacks
     rooms.value = data.result.map(r => ({

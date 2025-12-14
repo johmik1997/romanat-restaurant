@@ -57,8 +57,8 @@ class PaymentViewSet(viewsets.ModelViewSet):
             last_name=reservation.customer.last_name,
             phone=reservation.customer.phone or "0910000000",
             tx_ref=tx_ref,
-            return_url="http://localhost:5173/payment/success",
-            callback_url="http://127.0.0.1:8000/api/payments/callback/"
+            return_url="https://romanat-restaurant.vercel.app/payment/success",
+            callback_url="https://romanat-restaurant-7.onrender.com/api/payments/callback/"
         )
 
         if chapa_response.get("status") != "success":

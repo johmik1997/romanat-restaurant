@@ -139,7 +139,7 @@ const calculateTaxes = () => (parseFloat(calculateSubtotal()) * 0.1).toFixed(2)
 const processChapaPayment = async () => {
   try {
     const user = JSON.parse(localStorage.getItem('logged_in_user') || '{}')
-    const response = await fetch('http://127.0.0.1:8000/api/payments/payments/initialize/', {
+    const response = await fetch('https://romanat-restaurant-7.onrender.com/api/payments/payments/initialize/', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${user.access_token}`,

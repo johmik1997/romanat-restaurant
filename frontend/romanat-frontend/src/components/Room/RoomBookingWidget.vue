@@ -194,7 +194,7 @@ const reserveRoom = async () => {
 
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/api/reservations/',
+      'https://romanat-restaurant-7.onrender.com/api/reservations/',
       {
         room_id: props.room.id,
         check_in: booking.value.checkIn,

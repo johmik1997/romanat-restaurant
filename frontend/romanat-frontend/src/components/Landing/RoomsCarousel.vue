@@ -191,7 +191,7 @@ const isAtEnd = ref(false)
 // Fetch rooms from API
 const fetchRooms = async () => {
   try {
-    const { data } = await axios.get('http://127.0.0.1:8000/api/rooms/')
+    const { data } = await axios.get('https://romanat-restaurant-7.onrender.com/api/rooms/')
     // Map API fields to frontend structure
     rooms.value = data.result.map(r => ({
       id: r.id,

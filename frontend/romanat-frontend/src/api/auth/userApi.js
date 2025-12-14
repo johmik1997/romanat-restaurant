@@ -8,7 +8,6 @@ import api from '../api'
  * @returns {Promise}
  * 
  */
-  // const baseurl = import.meta.env.VITE_APP_BASE_URL || 'http://127.0.0.1:8080'
 
 export const fetchRoles = async () => {
   try {

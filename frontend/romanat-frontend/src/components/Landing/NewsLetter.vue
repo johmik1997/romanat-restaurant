@@ -251,7 +251,7 @@ const resetForm = () => {
 
 const submitContact = async () => {
   try {
-    await axios.post("http://127.0.0.1:8000/api/accounts/contact/", {
+    await axios.post("https://romanat-restaurant-7.onrender.com/api/accounts/contact/", {
       first_name: form.value.firstName,
       last_name: form.value.lastName,
       email: form.value.email,
