@@ -2,7 +2,7 @@
   <div class="flex">
 
     <!-- Sidebar -->
-    <Sidebar
+    <sidebar
       class="fixed top-0 left-0 h-screen w-64 bg-white shadow-md border-r"
     />
 
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import Sidebar from '../components/staffs/Sidebar.vue'
+import Sidebar from "../components/staffs/Sidebar.vue"
 
 export default {
   name: 'DefaultLayout',
