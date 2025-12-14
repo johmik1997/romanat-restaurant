@@ -88,12 +88,12 @@
 </template>
 
 <script>
-import Sidebar from "../components/staffs/Sidebar.vue"
+import sidebar from "../components/staffs/sideBar.vue"
 
 export default {
   name: 'DefaultLayout',
 
-  components: { Sidebar },
+  components: { sidebar },
 
   props: {
     title: {
