@@ -276,7 +276,7 @@ export default {
       if (type === 'guest') {
         this.$router.push('/guest')
       } else if (type === 'staff') {
-        this.$router.push('/staff')
+        this.$router.push('/login')
       }
     }
   },
